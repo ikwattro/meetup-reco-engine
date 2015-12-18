@@ -9,14 +9,17 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MyRecommendationEngineEnd2EndTest extends GraphAwareApiTest {
 
     @Override
     protected GraphDatabaseService createDatabase(){
+        File pathToDb = new File(getClass().getClassLoader().getResource("test.db").getFile());
+
         GraphDatabaseService graphDatabaseService = new GraphDatabaseFactory()
-                .newEmbeddedDatabaseBuilder("/Users/ikwattro/dev/_graphs/231/data/graph.db")
+                .newEmbeddedDatabaseBuilder(pathToDb.getAbsolutePath())
                 .newGraphDatabase();
 
         return graphDatabaseService;

@@ -14,6 +14,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,8 +38,10 @@ public class MyRecommendationEngineIntegrationTest extends DatabaseIntegrationTe
 
     @Override
     protected GraphDatabaseService createDatabase(){
+        File pathToDb = new File(getClass().getClassLoader().getResource("test.db").getFile());
+
         GraphDatabaseService graphDatabaseService = new GraphDatabaseFactory()
-                .newEmbeddedDatabaseBuilder("/Users/ikwattro/dev/_graphs/231/data/graph.db")
+                .newEmbeddedDatabaseBuilder(pathToDb)
                 .newGraphDatabase();
 
         return graphDatabaseService;
